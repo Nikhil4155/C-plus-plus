@@ -1,52 +1,53 @@
-#include <iostream>
-#include <string>
+#include<iostream>
 using namespace std;
 
-class EMPLOYEE {
-    int emp_num;
-    string emp_name;
-    double Basic, DA, IT, Net_Salary;
+class EMPLOYEE
+{
+    public:
+    int empnum;
+    string empname;
+    float basic,da,it,netsal;
 
-    void read() {
-        cout << "\nEnter employee name: ";
-        cin >> emp_name;
-        cout << "\nEnter employee number: ";
-        cin >> emp_num;
-        cout << "\nEnter Basic salary: ";
-        cin >> Basic;
+    void read()
+    {
+        cout<< "Enter the Employee number" ;
+        cin >> empnum;
+        cout<< "Enter the Employee name" ;
+        cin >> empname;
+        cout << "Enter basic Salary" ;
+        cin >> basic;
     }
 
-    void calc() {
-        DA = (52.0 / 100) * Basic;
-        double gross = Basic + DA;
-        IT = (30.0 / 100) * gross;
-        Net_Salary = gross - IT;
+    void calc()
+    { 
+    da = (52.0/100)*basic;
+    double gross = basic + da;
+    it=(30.0/100)*gross;
+    netsal=gross-it;
+
     }
 
-public:
-    void display() {
+    void display()
+    {
         read();
         calc();
-        cout << "\nEmployee name: " << emp_name;
-        cout << "\nEmployee number: " << emp_num;
-        cout << "\nBasic salary: " << Basic;
-        cout << "\nDA: " << DA;
-        cout << "\nIT: " << IT;
-        cout << "\nNet salary: " << Net_Salary << endl;
+        cout<< "Employee Number is "<< empnum ;
+        cout << "Employee Name is " << empname;
+        cout<< "Net salary is " << netsal;
     }
 };
 
-int main() {
-    int N;
-    cout << "\nEnter number of employees: ";
-    cin >> N;
-
-    EMPLOYEE emp[N];
-
-    for (int i = 0; i < N; i++) {
-        cout << "\nDetails for employee " << i + 1 << ":";
+int main()
+{
+    int n;
+    cout << "Enter the total number of employee" ;
+    cin >> n;
+    EMPLOYEE emp[n];
+    
+    for(int i=0; i<n; i++)
+    {
         emp[i].display();
     }
-
     return 0;
 }
+

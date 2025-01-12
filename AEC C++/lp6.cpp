@@ -1,47 +1,66 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-int main() {
-    char op;
-    double num1, num2, result;
+template<typename T>
+class Calculator{
+    public:
+    T add(T a, T b)
+    {
+        return a+b;
+    }
+    T sub(T a, T b)
+    {
+        return a-b;
+    }
+    T mul(T a, T b)
+    {
+        return a*b;
+    }
+    T div(T a, T b)
+    {
+        if (b==0)
+        {
+            cout<< "Division is not possible" ;
+            return 0;
+        }
+        else
+            return a/b;
+    }
+};
 
-    // Prompt user for first number
-    cout << "Enter the first number: ";
+int main()
+{
+    Calculator <double> calc;
+    double num1,num2;
+    cout<< "Enter the first number" ;
     cin >> num1;
-
-    // Prompt user for operator
-    cout << "Enter the operator (+, -, *, /): ";
+    cout<< "Enter the second Number" ;
+    cin >> num2;
+    char op;
+    cout << "Enter the operations(+,-,*,/)";
     cin >> op;
 
-    // Prompt user for second number
-    cout << "Enter the second number: ";
-    cin >> num2;
-
-    // Perform operation based on operator
-    switch (op) {
-        case '+':
-            result = num1 + num2;
-            break;
-        case '-':
-            result = num1 - num2;
-            break;
-        case '*':
-            result = num1 * num2;
-            break;
-        case '/':
-            if (num2 == 0) {
-                cout << "Error! Division by zero is not allowed." << endl;
-                return 0;
-            } else {
-                result = num1 / num2;
-            }
-            break;
-        default:
-            cout << "Error! Invalid operator." << endl;
-            return 0;
+    switch (op)
+    {
+    case '+':
+        cout<< calc.add(num1,num2) ;
+        break;
+    
+    case '-':
+        cout << calc.sub(num1,num2);
+        break;
+    
+    case '*':
+        cout << calc.mul(num1,num2);
+        break;
+    
+    case '/':
+        cout << calc.div(num1,num2);
+        break;
+    
+    default:
+        cout<< "Wrong Operations Selected";
+        break;
     }
 
-    // Display result
-    cout << num1 << " " << op << " " << num2 << " = " << result << endl;
-    return 0;
 }

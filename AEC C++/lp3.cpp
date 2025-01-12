@@ -1,54 +1,56 @@
-#include <iostream>
+
+#include<iostream>
 using namespace std;
 
-class number {
-public:
+class Numbers
+{
+    public:
     int num;
-
-public:
-    void setNum(int n) {
-        num = n;
+    public:
+    void setnum(int number)
+    {
+        num = number;
     }
 };
 
-class HEXADECIMAL : public number {
-public:
-    void display() {
-        cout << "Hexadecimal Value is : " << hex << num;
+class Hexadecimal : public Numbers{
+    public:
+    void display()
+    {
+        cout<< "The hexadecimal conversion of the number is" <<hex<<num ;
+    }
+};
+class Octal : public Numbers{
+    public:
+    void display()
+    {
+        cout<< "The Octal conversion of the number is" <<oct<<num ;
+    }
+};
+class Decimal : public Numbers{
+    public:
+    void display()
+    {
+        cout<< "The Decimal conversion of the number is" <<dec<<num ;
     }
 };
 
-class DECIMAL : public number {
-public:
-    void display() {
-        cout << "\nDecimal Value is : " << dec << num;
-    }
-};
+int main()
+{
+    int n=15;
+    Numbers obj1;
+    obj1.setnum(n);
 
-class OCTAL : public number {
-public:
-    void display() {
-        cout << "\nOctal Value is : " << oct << num;
-    }
-};
+    Hexadecimal obj2;
+    Octal obj3;
+    Decimal obj4;
+    
+    obj2.setnum(obj1.num);
+    obj3.setnum(obj1.num);
+    obj4.setnum(obj1.num);
 
-int main() {
-    number obj1;
-    HEXADECIMAL hObj;
-    DECIMAL dObj;
-    OCTAL oObj;
+    obj2.display();
+    obj3.display();
+    obj4.display();
 
-    obj1.setNum(10);
-
-    hObj.setNum(obj1.num);
-    dObj.setNum(obj1.num);
-    oObj.setNum(obj1.num);
-
-    cout << endl << "Values Displayed in Respective Number Systems" << endl;
-
-    hObj.display();
-    dObj.display();
-    oObj.display();
-
-    return 0;
 }

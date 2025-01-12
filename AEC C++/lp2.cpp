@@ -1,65 +1,63 @@
-#include <iostream> 
-#include <sstream> 
-using namespace std; 
+#include <iostream>
+using namespace std;
 
-class DATE { 
-private:  
-    int day, month, year;  
-public:  
-    DATE(int d, int m, int y) : day(d), month(m), year(y) {}     
+class DATE {
+private:
+    int day, month, year;
 
-    friend ostream& operator<<(ostream& out, const DATE& date);     
-    friend int operator-(const DATE& d1, const DATE& d2);     
-    friend DATE operator+(const DATE& d, int num);  
-};  
+public:
+    DATE(int d, int m, int y) : day(d), month(m), year(y) {}
 
-ostream& operator<<(ostream& out, const DATE& date) {     
-    out << date.day << "/" << date.month << "/" << date.year;     
-    return out;  
-}  
+    // Overload << operator to display dates
+    friend ostream& operator<<(ostream& out, const DATE& date) {
+        return out << date.day << "/" << date.month << "/" << date.year;
+    }
 
-int operator-(const DATE& d1, const DATE& d2) {  
-    // Convert both dates to days     
-    int days1 = d1.year * 365 + d1.month * 30 + d1.day;     
-    int days2 = d2.year * 365 + d2.month * 30 + d2.day;  
+    // Overload - operator to find the difference in days
+    friend int operator-(const DATE& d1, const DATE& d2) {
+        return (d1.year * 365 + d1.month * 30 + d1.day) -
+               (d2.year * 365 + d2.month * 30 + d2.day);
+    }
 
-    // Calculate the difference     
-    return days1 - days2;  
-}  
+    // Overload + operator to add days to a date
+    friend DATE operator+(const DATE& d, int num) {
+        int newDay = d.day + num;
+        int newMonth = d.month;
+        int newYear = d.year;
 
-DATE operator+(const DATE& d, int num) {  
-    DATE result = d;     
+        while (newDay > 30) {
+            newDay -= 30;
+            newMonth++;
+            if (newMonth > 12) {
+                newMonth = 1;
+                newYear++;
+            }
+        }
 
-    // Add 'num' days to the date     
-    result.day += num;  
+        return DATE(newDay, newMonth, newYear);
+    }
+};
 
-    // Adjust month and year if needed     
-    while (result.day > 30) {  
-        result.day -= 30;         
-        result.month++;         
-        if (result.month > 12) {             
-            result.month = 1;             
-            result.year++;  
-        }     
-    }     
-    return result;  
-}  
+int main() {
+    int day, month, year;
 
-int main() {     
-    int day, month, year;  
-    cout << "Enter first date (dd/mm/yyyy): ";     
-    cin >> day >> month >> year;     
-    DATE d1(day, month, year);     
+    // Input the first date
+    cout << "Enter first date (dd mm yyyy): ";
+    cin >> day >> month >> year;
+    DATE d1(day, month, year);
 
-    cout << "Enter second date (dd/mm/yyyy): ";     
-    cin >> day >> month >> year;     
-    DATE d2(day, month, year);     
+    // Input the second date
+    cout << "Enter second date (dd mm yyyy): ";
+    cin >> day >> month >> year;
+    DATE d2(day, month, year);
 
-    int no_of_days = d1 - d2;     
-    cout << "Difference between d1 and d2: " << no_of_days << " days" << endl;     
+    // Calculate and display the difference in days
+    int no_of_days = d1 - d2;
+    cout << "Difference between d1 and d2: " << no_of_days << " days\n";
 
-    DATE new_date = d1 + no_of_days;     
-    cout << "New date after adding no_of_days to d1: " << new_date << endl;  
+    // Add the difference in days to d1 and display the new date
+    cout << "New date after adding difference to d1: " << (d1 + no_of_days) << endl;
 
-    return 0;  
+    return 0;
 }
+

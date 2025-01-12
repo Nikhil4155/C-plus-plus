@@ -2,71 +2,74 @@
 #include <string>
 using namespace std;
 
-class Student {
-protected:
+class Student{
+    public:
     string name;
-    int rollNo;
+    int roll;
 
-public:
-    Student(string name, int rollNo) : name(name), rollNo(rollNo) {}
-
-    void displayStudentInfo() {
-        cout << "Name: " << name << endl;
-        cout << "Roll No: " << rollNo << endl;
+    public:
+    Student(string name,int rollno)
+    {
+        this->name = name;
+        this->roll= rollno;
+    }
+    void displaystudentinfo()
+    {
+        cout << "Student Name" << name;
+        cout << "Student Roll Number" << roll;
     }
 };
 
-// Test class (inherits from Student)
-class Test : public Student {
-protected:
-    int marks[6];
-
-public:
-    Test(string name, int rollNo, const int marks[]) : Student(name, rollNo) {
-        for (int i = 0; i < 6; i++) {
-            this->marks[i] = marks[i];
-        }
-    }
-
-    void displayMarks() {
-        cout << "Marks: ";
-        for (int i = 0; i < 6; i++) {
-            cout << marks[i] << " ";
-        }
-        cout << endl;
+class Test : public Student{
+    public:
+    int marks[3];
+    public:
+    Test(string name, int roll ,const int marks[]) : Student(name, roll)
+    {
+    // cout<< "Enter  the marks" ;
+    //     for(int i=0; i<3; i++)
+    //     {
+    //         cin >> marks[i];
+    //     }
     }
 };
 
-// Result class (inherits from Test)
-class Result : public Test {
-private:
-    int totalMarks;
-    float percentage;
+class Result : public Test{
+    public:
+    int totalmarks=0;
+    double percentage;
 
-public:
-    Result(string name, int rollNo, const int marks[]) : Test(name, rollNo, marks) {
-        calculateTotalAndPercentage();
+    public:
+    Result(string name, int roll,const int marks[]) : Test(name,roll,marks)
+    {
+        calculatetotalmarksandpercentage();
     }
 
-    void calculateTotalAndPercentage() {
-        totalMarks = 0;
-        for (int i = 0; i < 6; i++) {
-            totalMarks += marks[i];
+    public:
+    void calculatetotalmarksandpercentage()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            totalmarks += marks[i];
         }
-        percentage = (float)totalMarks / 600 * 100;
+        percentage = totalmarks/3;
+        cout<<" Total Marks Obtained is"<< totalmarks;
+        cout<<" percentage Obtained is"<< percentage;
     }
 
-    void displayResult() {
-        displayStudentInfo();
-        displayMarks();
-        cout << "Total Marks: " << totalMarks << endl;
-        cout << "Percentage: " << percentage << "%" << endl;
+    public:
+    void displayresult()
+    {
+        cout << "Student Name" << name;
+        cout << "Student Roll Number" << roll;
+        calculatetotalmarksandpercentage();
     }
+
 };
 
-int main() {
-    int marks[] = {85, 92, 78, 89, 95, 81};
-    Result student("John Doe", 123, marks);
-    student.displayResult();
-    return 0;
+int main()
+{
+    int marks[] = {75,60,95};
+    Result r("Nikhil" , 148, marks);
+    r.displayresult();
 }
